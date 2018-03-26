@@ -7,7 +7,7 @@ import {
     Button,
     StyleSheet
 } from 'react-native';
-import DropDownList from '../components/DropDownList';
+
 
 const styles = StyleSheet.create({
     boardInput: {
@@ -36,17 +36,9 @@ class TextInputChat extends Component {
     render() {
         let props = this.props;
         return(
-            <View>
+            <View style={{marginTop: 20}}>
                
-            {props.toggleListMention ? 
-                <DropDownList
-                  onPress={props.selecedtItemFromList}
-                  loadedList={props.loadedList}
-                  errorMsg = {props.errorMsgOnList}
-                />
-                :
-                null    
-              }
+       
             <KeyboardAvoidingView 
             style={styles.boardInput}
             behavior="padding"
@@ -65,6 +57,7 @@ class TextInputChat extends Component {
                   accessibilityLabel="Get the object to send to the serve"
               />
           </KeyboardAvoidingView>
+    
          </View>
         )
     }

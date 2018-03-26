@@ -8,9 +8,10 @@ import { View
          ,TouchableWithoutFeedback
          ,Keyboard         
          ,StyleSheet
+         ,KeyboardAvoidingView
     } from 'react-native';
 import  * as messageActions  from '../redux/actions/messageActions'
-
+import DropDownList from '../components/DropDownList';
 import { connect } from 'react-redux';
 import setMentionOnText from '../utils/setMentionOnText';
 import removeMentionFromText from '../utils/removeMentionFromText';
@@ -21,6 +22,7 @@ const styles=  StyleSheet.create({
         flexDirection: 'column',
         flex: 1,
         paddingTop: 30
+        
     },
     board: {
         flex: 3,        
@@ -122,23 +124,17 @@ class Test1 extends Component {
             <TouchableWithoutFeedback
               onPress={Keyboard.dismiss}
               accessible={false}
-            >       
-            <View 
+              
+            >    
+             <View 
               style={styles.container}              
-              >
+              >               
+           
                    <Button
                         title="Go to Test-2"
                         onPress={() => this.props.navigation.navigate('Page')}
                    />
-               <View style={styles.board}>
-                  <Text>
-                    {this.props.message.sendJSON.split(',').map((item, index) => {
-                        return <Text key={index}>{item},{"\n"}</Text>
-                    })}
-                  </Text>
-                </View>                
-               
-                <TextInputChat
+                     <TextInputChat
                     keysTrigger={['@', 'Backspace']}
                     activateTrigger={this.onKeyPressTiggerEvents}
                     onSelectionChangeInput={this.onSelectionChangeInputChat}
@@ -146,12 +142,29 @@ class Test1 extends Component {
                     value={this.props.message.text}
                     send={this.sendJSON}
                     titleButon={'Post'}
-                    selecedtItemFromList={this.selectedItemMentionFromList}
-                    loadedList={this.props.message.util.users}
-                    errorMsgOnList = {this.props.message.util.errorMsg}
-                    toggleListMention={this.props.message.util.toggleListMention}
+                    
                 />
+              {this.props.message.util.toggleListMention ? 
+                <DropDownList  
+                  onPress={this.selectedItemMentionFromList}
+                  loadedList={this.props.message.util.users}
+                  errorMsg = {this.props.message.util.errorMsg}
+                />
+                :
+                null    
+              }
+               <View style={styles.board}>
+                  <Text>
+                    {this.props.message.sendJSON.split(',').map((item, index) => {
+                        return <Text key={index}>{item},{"\n"}</Text>
+                    })}
+                  </Text>
+                </View>                
+              
+            
+                  
               </View>
+            
             </TouchableWithoutFeedback>
            
         )
