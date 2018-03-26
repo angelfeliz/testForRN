@@ -72,8 +72,14 @@ class Test1 extends Component {
     
     isBackspaceAtMention = ({start, end}, text, isWhiteSpace) => {             
         if(start) {           
-            let firstHalfMention = text.substr(0, start).match(/^@\w|@\w*(?!\s)/g) || [];            
-            return firstHalfMention.length > 0 ? firstHalfMention[firstHalfMention.length-1].match(/@\w*/) ? true : false : false;
+            let firstHalfMention = text.substr(0, start).match(/@\w*|\w*/g) || [];    
+             
+            if(firstHalfMention.length > 0){
+                let first = firstHalfMention.filter(item => item !== '');
+            
+               return first[first.length-1].match(/@\w*/) ? true : false;
+            }     
+            return firstHalfMention;
         }
     }
     

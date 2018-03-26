@@ -28,7 +28,11 @@ class TextInputChat extends Component {
     onKeyPressTiggerEvents = (key) => {       
         if(this.props.keysTrigger.find(item=> item === key)) {            
             this.props.activateTrigger(key);
-        }else {
+        }
+        else if(key === ' ') {
+            this.props.activateTrigger(key);
+        }
+        else {
             this.props.activateTrigger('');
         }
     } 
