@@ -28,6 +28,13 @@ const styles=  StyleSheet.create({
         flex: 3,        
         backgroundColor: 'powderblue',        
     },
+    buttonCustome: {
+        marginBottom: 10,
+        marginTop:5
+       , marginLeft: 10
+        ,marginRight: 10
+        ,backgroundColor: '#f0f8ff'       
+    }
    
 })
 
@@ -135,11 +142,12 @@ class Test1 extends Component {
              <View 
               style={styles.container}              
               >               
-           
+                  <View style={styles.buttonCustome}>
                    <Button
                         title="Go to Test-2"
                         onPress={() => this.props.navigation.navigate('Page')}
                    />
+                   </View>
                      <TextInputChat
                     keysTrigger={['@', 'Backspace']}
                     activateTrigger={this.onKeyPressTiggerEvents}

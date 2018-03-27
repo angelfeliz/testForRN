@@ -16,6 +16,13 @@ const styles = StyleSheet.create({
         padding: 3,
         backgroundColor: 'rgba(138, 178, 242, 0.6)'
     }
+    ,buttonCustome: {
+        marginBottom: 10,
+        marginTop:5
+       , marginLeft: 10
+        ,marginRight: 10
+        ,backgroundColor: '#f0f8ff'       
+    }
 })
 class Test2 extends Component {
     constructor(){
@@ -30,12 +37,14 @@ class Test2 extends Component {
     render(){
      const { navigate } = this.props.navigation;
     return (
-        <View style = {styles.container}>           
+        <View style = {styles.container}>     
+        <View style={styles.buttonCustome}>      
             <Button
               title="Go to Test-1"
         onPress={() =>
           navigate('Home', { name: 'Home' })
         }/>
+        </View>
         <Text>
             Here are the mention:
             <Text
