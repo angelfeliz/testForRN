@@ -15,7 +15,9 @@ import DropDownList from '../components/DropDownList';
 import { connect } from 'react-redux';
 import setMentionOnText from '../utils/setMentionOnText';
 import removeMentionFromText from '../utils/removeMentionFromText';
+import isBackspaceAtMention from '../utils/isBackspaceAtMention'
 import TextInputChat from '../components/TextInputChat';
+
 
 const styles=  StyleSheet.create({
     container: {
@@ -77,19 +79,6 @@ class Test1 extends Component {
         }
     } 
     
-    isBackspaceAtMention = ({start, end}, text, isWhiteSpace) => {             
-        if(start) {           
-            let firstHalfMention = text.substr(0, start).match(/@\w*|\w*/g) || [];    
-             
-            if(firstHalfMention.length > 0){
-                let first = firstHalfMention.filter(item => item !== '');
-            
-               return first[first.length-1].match(/@\w*/) ? true : false;
-            }     
-            return firstHalfMention;
-        }
-    }
-    
     onSelectionChangeInputChat = (positions) => {       
         
         this.props.setPositions(positions);
@@ -97,7 +86,7 @@ class Test1 extends Component {
       
         if(text.length > 0) {//if you delete all the text it wont go throw this part           
             if(this.props.message.util.isBackspace) {                
-                if(this.isBackspaceAtMention(positions, text)) {     
+                if(isBackspaceAtMention(positions, text)) {     
                     this.props.isBackspace(false);                     
                     let newText = removeMentionFromText(positions,text);
                     this.props.addText(newText);
